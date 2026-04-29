@@ -1,4 +1,4 @@
-﻿package com.lms.upload.dto;
+package com.lms.upload.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

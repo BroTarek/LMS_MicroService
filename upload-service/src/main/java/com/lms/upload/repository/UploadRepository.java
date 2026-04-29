@@ -1,4 +1,4 @@
-﻿package com.lms.upload.repository;
+package com.lms.upload.repository;
 
 import com.lms.upload.entity.UploadedFile;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-﻿package com.lms.upload.controller;
+package com.lms.upload.controller;
 
 import com.lms.upload.dto.UploadResponse;
 import com.lms.upload.entity.UploadedFile;

@@ -1,4 +1,4 @@
-﻿package com.lms.course.aspect;
+package com.lms.course.aspect;
 
 import com.lms.course.annotation.RequireCourseOwner;
 import com.lms.course.entity.Course;
@@ -41,8 +41,9 @@ public class AuthorizationAspect {
             throw new RuntimeException("User not authenticated");
         }
         
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("Course not found: " + courseId));
+        final Long finalCourseId = courseId;
+        Course course = courseRepository.findById(finalCourseId)
+                .orElseThrow(() -> new RuntimeException("Course not found: " + finalCourseId));
         if (!course.getTeacherUsername().equals(teacherUsername)) {
             throw new RuntimeException("You are not the owner of this course");
         }

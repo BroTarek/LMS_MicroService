@@ -1,4 +1,4 @@
-﻿package com.lms.course.config;
+package com.lms.course.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

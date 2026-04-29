@@ -1,4 +1,4 @@
-﻿package com.lms.auth.dto;
+package com.lms.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

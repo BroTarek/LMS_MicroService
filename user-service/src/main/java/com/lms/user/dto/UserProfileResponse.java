@@ -1,4 +1,4 @@
-﻿package com.lms.user.dto;
+package com.lms.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-﻿package com.lms.auth.service;
+package com.lms.auth.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,13 +13,13 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     
-    @Value("\")
+    @Value("${jwt.secret}")
     private String secret;
     
-    @Value("\")
+    @Value("${jwt.expiration}")
     private Long expiration;
     
-    @Value("\")
+    @Value("${jwt.refresh-expiration}")
     private Long refreshExpiration;
     
     private Key getSigningKey() {

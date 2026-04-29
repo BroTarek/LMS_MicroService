@@ -1,4 +1,4 @@
-﻿package com.lms.gateway;
+package com.lms.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

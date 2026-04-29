@@ -1,4 +1,4 @@
-﻿package com.lms.course.client;
+package com.lms.course.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

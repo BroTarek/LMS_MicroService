@@ -1,4 +1,4 @@
-﻿package com.lms.user.controller;
+package com.lms.user.controller;
 
 import com.lms.user.dto.UserProfileResponse;
 import com.lms.user.dto.UserProfileUpdateRequest;

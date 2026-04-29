@@ -1,4 +1,4 @@
-﻿package com.lms.course.repository;
+package com.lms.course.repository;
 
 import com.lms.course.entity.Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;

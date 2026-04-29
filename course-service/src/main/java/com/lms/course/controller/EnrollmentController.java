@@ -1,4 +1,4 @@
-﻿package com.lms.course.controller;
+package com.lms.course.controller;
 
 import com.lms.course.dto.EnrollmentRequest;
 import com.lms.course.entity.Enrollment;

@@ -1,4 +1,4 @@
-﻿package com.lms.auth.config;
+package com.lms.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

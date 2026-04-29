@@ -1,4 +1,4 @@
-﻿package com.lms.gateway.filter;
+package com.lms.gateway.filter;
 
 import com.lms.gateway.dto.ValidateResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class AuthServiceClient {
     
     private final WebClient.Builder webClientBuilder;
     
-    @Value("\")
+    @Value("${eureka.client.service-url.defaultZone}")
     private String eurekaUrl;
     
     public Mono<ValidateResponse> validateToken(String token) {

@@ -1,4 +1,4 @@
-﻿package com.lms.auth.entity;
+package com.lms.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

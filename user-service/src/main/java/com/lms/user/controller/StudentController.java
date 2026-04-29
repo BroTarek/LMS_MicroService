@@ -1,4 +1,4 @@
-﻿package com.lms.user.controller;
+package com.lms.user.controller;
 
 import com.lms.user.client.CourseServiceClient;
 import com.lms.user.dto.CourseSummary;

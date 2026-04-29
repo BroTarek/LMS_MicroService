@@ -1,4 +1,4 @@
-﻿package com.lms.course.exception;
+package com.lms.course.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

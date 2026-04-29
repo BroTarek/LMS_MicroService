@@ -1,4 +1,4 @@
-﻿package com.lms.user.repository;
+package com.lms.user.repository;
 
 import com.lms.user.entity.UserProfile;
 import org.springframework.data.jpa.repository.JpaRepository;

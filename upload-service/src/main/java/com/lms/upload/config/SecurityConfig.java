@@ -1,4 +1,4 @@
-﻿package com.lms.upload.config;
+package com.lms.upload.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

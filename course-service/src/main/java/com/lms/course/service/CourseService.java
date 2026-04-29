@@ -1,4 +1,4 @@
-﻿package com.lms.course.service;
+package com.lms.course.service;
 
 import com.lms.course.dto.CreateCourseRequest;
 import com.lms.course.entity.Course;

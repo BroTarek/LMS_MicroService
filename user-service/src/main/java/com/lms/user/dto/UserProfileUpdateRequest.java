@@ -1,4 +1,4 @@
-﻿package com.lms.user.dto;
+package com.lms.user.dto;
 
 import lombok.Data;
 import jakarta.validation.constraints.Email;

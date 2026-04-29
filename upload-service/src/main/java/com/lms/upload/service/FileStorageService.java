@@ -1,4 +1,4 @@
-﻿package com.lms.upload.service;
+package com.lms.upload.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 public class FileStorageService {
     
-    @Value("\")
+    @Value("${file.upload-dir}")
     private String uploadDir;
     
     private Path fileStoragePath;

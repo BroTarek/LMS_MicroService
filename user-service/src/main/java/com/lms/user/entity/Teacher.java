@@ -1,4 +1,4 @@
-﻿package com.lms.user.entity;
+package com.lms.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

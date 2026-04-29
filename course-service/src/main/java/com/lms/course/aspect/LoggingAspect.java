@@ -1,4 +1,4 @@
-﻿package com.lms.course.aspect;
+package com.lms.course.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;

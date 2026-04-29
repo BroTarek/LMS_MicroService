@@ -1,4 +1,4 @@
-﻿package com.lms.user.config;
+package com.lms.user.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

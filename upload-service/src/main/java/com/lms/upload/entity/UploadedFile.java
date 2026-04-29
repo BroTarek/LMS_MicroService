@@ -1,4 +1,4 @@
-﻿package com.lms.upload.entity;
+package com.lms.upload.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

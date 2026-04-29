@@ -1,4 +1,4 @@
-﻿package com.lms.auth.controller;
+package com.lms.auth.controller;
 
 import com.lms.auth.dto.*;
 import com.lms.auth.service.AuthService;

@@ -1,4 +1,4 @@
-﻿package com.lms.auth.repository;
+package com.lms.auth.repository;
 
 import com.lms.auth.entity.Credential;
 import org.springframework.data.jpa.repository.JpaRepository;

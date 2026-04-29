@@ -1,4 +1,4 @@
-﻿package com.lms.course.controller;
+package com.lms.course.controller;
 
 import com.lms.course.annotation.RequireCourseOwner;
 import com.lms.course.dto.CreateLessonRequest;

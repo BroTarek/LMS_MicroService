@@ -1,4 +1,4 @@
-﻿package com.lms.user.client;
+package com.lms.user.client;
 
 import com.lms.user.dto.CourseSummary;
 import org.springframework.cloud.openfeign.FeignClient;

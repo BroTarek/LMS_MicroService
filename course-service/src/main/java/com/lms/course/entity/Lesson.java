@@ -1,4 +1,4 @@
-﻿package com.lms.course.entity;
+package com.lms.course.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

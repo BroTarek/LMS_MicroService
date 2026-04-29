@@ -1,4 +1,4 @@
-﻿package com.lms.user.service;
+package com.lms.user.service;
 
 import com.lms.user.dto.UserProfileUpdateRequest;
 import com.lms.user.entity.*;

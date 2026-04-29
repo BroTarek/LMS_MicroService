@@ -1,4 +1,4 @@
-﻿package com.lms.upload.exception;
+package com.lms.upload.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

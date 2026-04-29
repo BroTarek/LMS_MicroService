@@ -1,4 +1,4 @@
-﻿package com.lms.auth.exception;
+package com.lms.auth.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

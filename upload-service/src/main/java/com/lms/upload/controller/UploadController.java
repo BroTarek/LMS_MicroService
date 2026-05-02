@@ -24,8 +24,9 @@ public class UploadController {
     
     @PostMapping
     public ResponseEntity<UploadResponse> uploadFile(@RequestParam("file") MultipartFile file,
+                                                     @RequestParam(value = "courseId", required = false) Long courseId,
                                                      @RequestHeader("X-Username") String username) {
-        return ResponseEntity.ok(uploadService.saveFileMetadata(file, username));
+        return ResponseEntity.ok(uploadService.saveFileMetadata(file, courseId, username));
     }
     
     @GetMapping

@@ -34,4 +34,22 @@ public class LessonController {
     public ResponseEntity<Lesson> getLesson(@PathVariable Long lessonId) {
         return ResponseEntity.ok(lessonService.getLesson(lessonId));
     }
+
+    @PutMapping("/{lessonId}")
+    @RequireCourseOwner
+    public ResponseEntity<Lesson> updateLesson(@PathVariable Long courseId,
+                                               @PathVariable Long lessonId,
+                                               @Valid @RequestBody CreateLessonRequest request,
+                                               @RequestHeader("X-Username") String username) {
+        return ResponseEntity.ok(lessonService.updateLesson(courseId, lessonId, request, username));
+    }
+
+    @DeleteMapping("/{lessonId}")
+    @RequireCourseOwner
+    public ResponseEntity<Void> deleteLesson(@PathVariable Long courseId,
+                                             @PathVariable Long lessonId,
+                                             @RequestHeader("X-Username") String username) {
+        lessonService.deleteLesson(courseId, lessonId, username);
+        return ResponseEntity.ok().build();
+    }
 }

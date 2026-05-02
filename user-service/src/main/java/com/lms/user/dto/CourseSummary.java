@@ -11,4 +11,5 @@ public class CourseSummary {
     private Long id;
     private String title;
     private String teacherName;
+    private String teacherUsername;
 }

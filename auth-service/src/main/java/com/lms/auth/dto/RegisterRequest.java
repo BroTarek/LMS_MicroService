@@ -15,4 +15,10 @@ public class RegisterRequest {
     @NotBlank
     @Pattern(regexp = "STUDENT|TEACHER")
     private String role;
+    
+    @NotBlank
+    private String fullName;
+    
+    @NotBlank
+    private String email;
 }

@@ -12,4 +12,12 @@ public class UserProfileUpdateRequest {
     @NotBlank
     @Email
     private String email;
+    
+    // Optional Teacher fields
+    private String department;
+    private String title;
+    
+    // Optional Student fields
+    private String gradeLevel;
+    private String major;
 }

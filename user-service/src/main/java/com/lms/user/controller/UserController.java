@@ -18,23 +18,14 @@ public class UserController {
     
     @GetMapping("/me")
     public ResponseEntity<UserProfileResponse> getMyProfile(@RequestHeader("X-Username") String username) {
-        UserProfile profile = userProfileService.getProfile(username);
-        String role = userProfileService.getUserRole(username);
-        UserProfileResponse response = new UserProfileResponse(
-            profile.getUsername(), profile.getFullName(), profile.getEmail(), role
-        );
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(userProfileService.getFullProfileResponse(username));
     }
     
     @PutMapping("/me")
     public ResponseEntity<UserProfileResponse> updateMyProfile(
             @Valid @RequestBody UserProfileUpdateRequest request,
             @RequestHeader("X-Username") String username) {
-        UserProfile profile = userProfileService.updateProfile(username, request);
-        String role = userProfileService.getUserRole(username);
-        UserProfileResponse response = new UserProfileResponse(
-            profile.getUsername(), profile.getFullName(), profile.getEmail(), role
-        );
-        return ResponseEntity.ok(response);
+        userProfileService.updateProfile(username, request);
+        return ResponseEntity.ok(userProfileService.getFullProfileResponse(username));
     }
 }

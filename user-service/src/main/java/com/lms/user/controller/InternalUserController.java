@@ -23,4 +23,9 @@ public class InternalUserController {
         }
         return ResponseEntity.ok().build();
     }
+    
+    @GetMapping("/{username}/role")
+    public ResponseEntity<String> getUserRole(@PathVariable String username) {
+        return ResponseEntity.ok(userProfileService.getUserRole(username));
+    }
 }

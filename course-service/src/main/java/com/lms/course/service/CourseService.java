@@ -38,4 +38,17 @@ public class CourseService {
                 .orElseThrow(() -> new RuntimeException("Course not found or not owned by you"));
         courseRepository.delete(course);
     }
+
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    @Transactional
+    public Course updateCourse(Long courseId, CreateCourseRequest request, String teacherUsername) {
+        Course course = courseRepository.findByIdAndTeacherUsername(courseId, teacherUsername)
+                .orElseThrow(() -> new RuntimeException("Course not found or not owned by you"));
+        course.setTitle(request.getTitle());
+        course.setDescription(request.getDescription());
+        return courseRepository.save(course);
+    }
 }

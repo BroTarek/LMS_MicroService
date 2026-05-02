@@ -6,6 +6,9 @@ import com.lms.auth.repository.CredentialRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +18,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final BlacklistService blacklistService;
+    private final RestTemplate restTemplate;
     
     public void register(RegisterRequest request) {
         if (credentialRepository.existsByUsername(request.getUsername())) {
@@ -28,7 +32,14 @@ public class AuthService {
         credential.setEnabled(true);
         
         credentialRepository.save(credential);
-        // TODO: Call User Service to create profile via WebClient
+        
+        Map<String, String> userRequest = new HashMap<>();
+        userRequest.put("username", request.getUsername());
+        userRequest.put("role", request.getRole());
+        userRequest.put("fullName", request.getFullName());
+        userRequest.put("email", request.getEmail());
+        
+        restTemplate.postForEntity("http://USER-SERVICE/internal/users", userRequest, Void.class);
     }
     
     public AuthResponse login(LoginRequest request) {
@@ -50,6 +61,27 @@ public class AuthService {
         long expiration = claims.getExpiration().getTime();
         long ttl = expiration - System.currentTimeMillis();
         blacklistService.blacklistToken(token, ttl);
+    }
+    
+    public AuthResponse refreshToken(String refreshToken) {
+        if (!jwtService.isTokenValid(refreshToken)) {
+            throw new RuntimeException("Invalid or expired refresh token");
+        }
+        
+        String username = jwtService.extractUsername(refreshToken);
+        String role = jwtService.extractRole(refreshToken);
+        
+        Credential credential = credentialRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+                
+        if (!credential.isEnabled()) {
+            throw new RuntimeException("Account is disabled");
+        }
+        
+        String newToken = jwtService.generateToken(username, role);
+        String newRefreshToken = jwtService.generateRefreshToken(username, role);
+        
+        return new AuthResponse(newToken, newRefreshToken, username, role);
     }
     
     public ValidateResponse validateToken(String token) {

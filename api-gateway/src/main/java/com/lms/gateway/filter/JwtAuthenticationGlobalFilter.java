@@ -21,10 +21,10 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
     
     private final AuthServiceClient authServiceClient;
     
-    // Paths that don't require authentication
     private static final List<String> PUBLIC_PATHS = List.of(
         "/auth/register",
-        "/auth/login"
+        "/auth/login",
+        "/auth/refresh"
     );
     
     @Override

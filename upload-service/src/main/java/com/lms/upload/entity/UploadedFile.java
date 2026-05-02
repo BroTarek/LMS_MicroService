@@ -34,6 +34,9 @@ public class UploadedFile {
     @Column(name = "mime_type")
     private String mimeType;
     
+    @Column(name = "course_id")
+    private Long courseId;
+    
     @PrePersist
     protected void onCreate() {
         uploadedAt = LocalDateTime.now();

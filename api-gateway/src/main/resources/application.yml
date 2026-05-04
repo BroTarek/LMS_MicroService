@@ -1,4 +1,4 @@
-﻿spring:
+spring:
   application:
     name: api-gateway
   cloud:
@@ -20,6 +20,18 @@
           uri: lb://upload-service
           predicates:
             - Path=/api/uploads/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            maxAge: 3600
 
 server:
   port: 8080

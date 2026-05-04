@@ -26,7 +26,7 @@ public class UploadService {
     private final UploadRepository uploadRepository;
     private final FileStorageService fileStorageService;
     private final RestTemplate restTemplate;
-    private static final String BASE_URL = "http://localhost:8084/api/uploads/";
+    private static final String BASE_URL = "/api/uploads/";
     
     @Transactional
     public UploadResponse saveFileMetadata(MultipartFile file, Long courseId, String uploaderUsername) {

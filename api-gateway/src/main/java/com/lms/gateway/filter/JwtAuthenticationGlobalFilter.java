@@ -81,9 +81,12 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
         
         // Public GET endpoints
         if (method == HttpMethod.GET) {
+            // "/api/courses/my" is NOT public, but other /api/courses/** are
+            if (path.equals("/api/courses/my") || path.equals("/api/enrollments/my-courses")) {
+                return false;
+            }
             return path.startsWith("/api/courses") || 
-                   path.startsWith("/api/lessons") || 
-                   path.startsWith("/api/uploads"); // Allow viewing uploads if needed
+                   path.startsWith("/api/lessons");
         }
         
         return false;

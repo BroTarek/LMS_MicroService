@@ -4,6 +4,7 @@ import com.lms.gateway.dto.ValidateResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -24,8 +25,8 @@ public class AuthServiceClient {
         
         return webClient
             .get()
-            .uri("http://AUTH-SERVICE/auth/validate")
-            .header("Authorization", "Bearer " + token)
+            .uri("http://auth-service/auth/validate")
+            .headers(headers -> headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token))
             .retrieve()
             .bodyToMono(ValidateResponse.class)
             .onErrorResume(e -> {

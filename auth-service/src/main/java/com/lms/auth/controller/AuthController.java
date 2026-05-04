@@ -4,12 +4,15 @@ import com.lms.auth.dto.*;
 import com.lms.auth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
     
     private final AuthService authService;
@@ -38,7 +41,12 @@ public class AuthController {
     }
     
     @GetMapping("/validate")
-    public ResponseEntity<ValidateResponse> validate(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<ValidateResponse> validate(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
+        log.debug("Received validation request with header: {}", authHeader);
+        if (authHeader == null || authHeader.isEmpty()) {
+            log.warn("Authorization header is missing or empty");
+            return ResponseEntity.badRequest().body(new ValidateResponse(false, null, null, "Authorization header is missing"));
+        }
         String token = authHeader.replace("Bearer ", "");
         return ResponseEntity.ok(authService.validateToken(token));
     }

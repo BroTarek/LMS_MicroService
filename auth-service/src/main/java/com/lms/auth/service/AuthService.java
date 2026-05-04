@@ -39,7 +39,8 @@ public class AuthService {
         userRequest.put("fullName", request.getFullName());
         userRequest.put("email", request.getEmail());
         
-        restTemplate.postForEntity("http://USER-SERVICE/internal/users", userRequest, Void.class);
+        restTemplate.postForEntity("http://user-service/internal/users", userRequest, Void.class);
+        
     }
     
     public AuthResponse login(LoginRequest request) {

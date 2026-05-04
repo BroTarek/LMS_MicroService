@@ -5,19 +5,19 @@
     gateway:
       routes:
         - id: auth-service
-          uri: lb://AUTH-SERVICE
+          uri: lb://auth-service
           predicates:
             - Path=/auth/**
         - id: user-service
-          uri: lb://USER-SERVICE
+          uri: lb://user-service
           predicates:
             - Path=/api/users/**,/internal/users/**
         - id: course-service
-          uri: lb://COURSE-SERVICE
+          uri: lb://course-service
           predicates:
             - Path=/api/courses/**,/api/enrollments/**,/api/lessons/**
         - id: upload-service
-          uri: lb://UPLOAD-SERVICE
+          uri: lb://upload-service
           predicates:
             - Path=/api/uploads/**
 

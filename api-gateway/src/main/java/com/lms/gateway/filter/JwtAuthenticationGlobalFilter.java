@@ -6,6 +6,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -24,15 +25,18 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
     private static final List<String> PUBLIC_PATHS = List.of(
         "/auth/register",
         "/auth/login",
-        "/auth/refresh"
+        "/auth/refresh",
+        "/auth/logout",
+        "/auth/validate"
     );
     
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
+        HttpMethod method = exchange.getRequest().getMethod();
         
-        // Skip authentication for public paths
-        if (isPublicPath(path)) {
+        // Skip authentication for public paths and public GET requests
+        if (isPublicPath(path, method)) {
             return chain.filter(exchange);
         }
         
@@ -44,7 +48,7 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
             return exchange.getResponse().setComplete();
         }
         
-        String token = authHeader.substring(7);
+        String token = authHeader.substring(7).trim();
         
         // Validate token with Auth Service
         return authServiceClient.validateToken(token)
@@ -69,8 +73,20 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter, Ordered {
             });
     }
     
-    private boolean isPublicPath(String path) {
-        return PUBLIC_PATHS.stream().anyMatch(path::startsWith);
+    private boolean isPublicPath(String path, HttpMethod method) {
+        // Auth endpoints are always public
+        if (PUBLIC_PATHS.stream().anyMatch(path::startsWith)) {
+            return true;
+        }
+        
+        // Public GET endpoints
+        if (method == HttpMethod.GET) {
+            return path.startsWith("/api/courses") || 
+                   path.startsWith("/api/lessons") || 
+                   path.startsWith("/api/uploads"); // Allow viewing uploads if needed
+        }
+        
+        return false;
     }
     
     @Override

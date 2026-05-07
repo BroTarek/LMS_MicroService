@@ -36,8 +36,41 @@ public class CourseController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Course> getCourse(@PathVariable Long id) {
-        return ResponseEntity.ok(courseService.getCourse(id));
+    public ResponseEntity<Course> getCourse(@PathVariable Long id,
+                                            @RequestHeader(value = "X-Username", required = false) String username,
+                                            @RequestHeader(value = "X-Role", required = false) String role) {
+        Course course = courseService.getCourse(id);
+        
+        boolean canSeeLessons = false;
+        
+        if (username != null && role != null) {
+            if ("TEACHER".equals(role)) {
+                if (course.getTeacherUsername().equals(username)) {
+                    canSeeLessons = true;
+                }
+            } else if ("STUDENT".equals(role)) {
+                boolean isApproved = course.getEnrollments().stream()
+                    .anyMatch(e -> e.getStudentUsername().equals(username) && "APPROVED".equals(e.getStatus()));
+                if (isApproved) {
+                    canSeeLessons = true;
+                }
+            }
+        }
+        
+        if (!canSeeLessons) {
+            // Create a shallow copy to avoid modifying the persistent entity's lessons collection
+            Course responseCourse = new Course();
+            responseCourse.setId(course.getId());
+            responseCourse.setTitle(course.getTitle());
+            responseCourse.setDescription(course.getDescription());
+            responseCourse.setTeacherUsername(course.getTeacherUsername());
+            responseCourse.setCreatedAt(course.getCreatedAt());
+            responseCourse.setEnrollments(course.getEnrollments());
+            responseCourse.setLessons(new java.util.ArrayList<>()); // Hide lessons
+            return ResponseEntity.ok(responseCourse);
+        }
+        
+        return ResponseEntity.ok(course);
     }
     
     @DeleteMapping("/{id}")

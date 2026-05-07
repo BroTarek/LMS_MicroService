@@ -21,7 +21,7 @@ public class LessonController {
     @RequireCourseOwner
     public ResponseEntity<Lesson> addLesson(@PathVariable Long courseId,
                                             @Valid @RequestBody CreateLessonRequest request,
-                                            @RequestHeader("X-Username") String username) {
+                                            @RequestHeader(value = "X-Username", required = false) String username) {
         return ResponseEntity.ok(lessonService.addLesson(courseId, request, username));
     }
     
@@ -40,7 +40,7 @@ public class LessonController {
     public ResponseEntity<Lesson> updateLesson(@PathVariable Long courseId,
                                                @PathVariable Long lessonId,
                                                @Valid @RequestBody CreateLessonRequest request,
-                                               @RequestHeader("X-Username") String username) {
+                                               @RequestHeader(value = "X-Username", required = false) String username) {
         return ResponseEntity.ok(lessonService.updateLesson(courseId, lessonId, request, username));
     }
 
@@ -48,7 +48,7 @@ public class LessonController {
     @RequireCourseOwner
     public ResponseEntity<Void> deleteLesson(@PathVariable Long courseId,
                                              @PathVariable Long lessonId,
-                                             @RequestHeader("X-Username") String username) {
+                                             @RequestHeader(value = "X-Username", required = false) String username) {
         lessonService.deleteLesson(courseId, lessonId, username);
         return ResponseEntity.ok().build();
     }
